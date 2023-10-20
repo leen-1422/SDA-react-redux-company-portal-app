@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { AppState } from '../redux/store';
 import { allCompaniesActions } from '../redux/slice/allCompanies';
 import { Link } from 'react-router-dom';
 import { getSearch } from '../redux/slice/searchSlice';
+
 
 export default function AllCompanies() {
   const dispatch = useDispatch();
@@ -40,21 +40,29 @@ export default function AllCompanies() {
   });
 
   return (
-    <div>
-      <section>
-        <input type="text" placeholder="Search content" onChange={(e) => dispatch(getSearch(e.target.value))} />
-      </section>
+    <div >
+
+      <div>
+        
+      <input type="text" placeholder="Search content" onChange={(e) => dispatch(getSearch(e.target.value))} />
+      </div>
+      <div className='container'>
       {filteredCompanies.map((company) => (
-        <div key={company.id}>
-          <h3>
-            {company.description} {company.login}
-          </h3>
-          <img src={company.avatar_url} height="150px" width="100px" alt="Company Avatar" />
+        <div  key={company.id}>
+          <div className='box'>
+          <h3>{company.login}</h3>
+          <img src={company.avatar_url} height="150px" width="100px" alt="Company Avatar" /> <br/>
           <Link to={`companies/${company.id}`}>
             <button>Click</button>
           </Link>
+
+          </div>
+          
         </div>
       ))}
+
+      </div>
+
     </div>
   );
 }
